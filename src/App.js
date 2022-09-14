@@ -1,23 +1,24 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import Login from './components/Login';
 
 function App() {
+  const [username, setUsername] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const changeUsernameHandler = (newName) => {
+    setUsername(newName);
+    setIsLoggedIn(true);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="h-screen bg-gradient-to-br from-primary-blue to-primary-pink">
+        {username}
+        {!isLoggedIn && (
+          <Login username={username} onChangeUsername={changeUsernameHandler} />
+        )}
+      </div>
     </div>
   );
 }
