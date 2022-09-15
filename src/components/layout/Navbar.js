@@ -9,24 +9,16 @@ const Navbar = () => {
     useContext(UserContext);
 
   return (
-    <div className="w-screen h-16 bg-white text-gray-900 dark:bg-gray-900 dark:text-white fixed transition-all duration-500">
-      <div className="w-3/4 mx-auto h-full flex items-center">
-        <img src={Logo} alt="Logo" className="h-4/5 mr-5" />
+    <header className="w-screen h-16 bg-slate-100 text-gray-900 dark:bg-gray-900 dark:text-slate-100 fixed top-0 transition-all duration-500">
+      <div className="container mx-auto h-full flex items-center px-4">
+        <img src={Logo} alt="Logo" className="h-3/5 mr-5" />
         <div className="text-2xl font-extrabold">Todo App</div>
         <ul className="ml-auto flex items-center gap-x-5">
           <li>
             {darkMode ? (
-              <img
-                src={moon}
-                alt="dark mode icon"
-                className="w-6 cursor-pointer fill-yellow-400 text-yellow-500 stroke-yellow-500"
-              />
+              <img src={moon} alt="dark mode icon" className="w-6 h-6" />
             ) : (
-              <img
-                src={sun}
-                alt="light mode icon"
-                className="w-6 cursor-pointer"
-              />
+              <img src={sun} alt="light mode icon" className="w-6 h-6" />
             )}
           </li>
           <li className="flex items-center">
@@ -49,7 +41,7 @@ const Navbar = () => {
           </li>
         </ul>
       </div>
-    </div>
+    </header>
   );
 };
 
