@@ -1,12 +1,11 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import UserContext from '../context/user-context';
 
-const Login = (props) => {
+const Login = () => {
   const [newUsername, setNewUsername] = useState('');
-  const changeUsernameHandler = (e) => {
-    setNewUsername(e.target.value);
-  };
+  const { changeUsernameHandler } = useContext(UserContext);
   const submitUsernameHandler = () => {
-    props.onChangeUsername(newUsername);
+    changeUsernameHandler(newUsername);
   };
   return (
     <div className="flex h-screen items-center justify-center">
@@ -20,7 +19,7 @@ const Login = (props) => {
         <input
           type="text"
           value={newUsername}
-          onChange={changeUsernameHandler}
+          onChange={(e) => setNewUsername(e.target.value)}
           id="first_name"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-2/3 mx-auto p-2.5 mb-6"
           placeholder="İsminiz"

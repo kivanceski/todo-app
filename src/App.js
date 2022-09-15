@@ -1,12 +1,13 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import Login from './components/Login';
 import MainPage from './components/MainPage';
+import UserContext from './context/user-context';
 
 function App() {
   const [username, setUsername] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
   const [darkClass, setDarkClass] = useState('');
 
   const changeUsernameHandler = (newName) => {
@@ -17,29 +18,32 @@ function App() {
     } else alert('İsim boş bırakılamaz');
   };
 
-  const darkModeHandler = () => {
+  useEffect(() => {
     if (darkMode) setDarkClass('dark');
     else setDarkClass('');
-  };
+  }, [darkMode]);
 
   return (
     <div className="App">
-      <div
-        className={
-          'h-screen bg-gradient-to-br from-primary-blue to-primary-pink ' +
-          darkClass
-        }
+      <UserContext.Provider
+        value={{
+          isLoggedIn,
+          setIsLoggedIn,
+          username,
+          changeUsernameHandler,
+          darkMode,
+          setDarkMode,
+        }}
       >
-        {isLoggedIn ? (
-          <MainPage
-            username={username}
-            darkMode={darkMode}
-            onChangeDarkMode={darkModeHandler}
-          />
-        ) : (
-          <Login username={username} onChangeUsername={changeUsernameHandler} />
-        )}
-      </div>
+        <div
+          className={
+            'h-screen bg-gradient-to-br from-primary-blue to-primary-pink ' +
+            darkClass
+          }
+        >
+          {isLoggedIn ? <MainPage /> : <Login />}
+        </div>
+      </UserContext.Provider>
     </div>
   );
 }

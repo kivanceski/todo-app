@@ -1,13 +1,9 @@
 import Navbar from './layout/Navbar';
 
-const MainPage = (props) => {
+const MainPage = () => {
   return (
     <>
-      <Navbar
-        username={props.username}
-        darkMode={props.darkMode}
-        onChangeDarkMode={props.onChangeDarkMode}
-      />
+      <Navbar />
     </>
   );
 };
