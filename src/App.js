@@ -20,12 +20,19 @@ function App() {
 
   useEffect(() => {
     const usernameItem = localStorage.getItem('username');
+    const darkModeItem = JSON.parse(localStorage.getItem('darkMode'));
     if (usernameItem) changeUsernameHandler(usernameItem);
+    if (darkModeItem) setDarkMode(darkModeItem);
   }, []);
 
   useEffect(() => {
-    if (darkMode) setDarkClass('dark');
-    else setDarkClass('');
+    if (darkMode) {
+      localStorage.setItem('darkMode', true);
+      setDarkClass('dark');
+    } else {
+      localStorage.setItem('darkMode', false);
+      setDarkClass('');
+    }
   }, [darkMode]);
 
   return (
