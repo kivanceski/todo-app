@@ -1,8 +1,7 @@
 import Logo from '../../assets/logo.png';
 import { useContext } from 'react';
 import UserContext from '../../context/user-context';
-import moon from '../../assets/moon.svg';
-import sun from '../../assets/sun.svg';
+import { MoonIcon, SunIcon } from '@heroicons/react/24/outline';
 
 const Navbar = () => {
   const { username, setIsLoggedIn, darkMode, setDarkMode } =
@@ -21,9 +20,19 @@ const Navbar = () => {
         <ul className="ml-auto flex items-center gap-x-5">
           <li>
             {darkMode ? (
-              <img src={moon} alt="dark mode icon" className="w-6 h-6" />
+              <label htmlFor="purple-toggle">
+                <MoonIcon
+                  htmlFor="purple-toggle"
+                  className="h-7 cursor-pointer hover:fill-yellow-500"
+                />
+              </label>
             ) : (
-              <img src={sun} alt="light mode icon" className="w-6 h-6" />
+              <label htmlFor="purple-toggle">
+                <SunIcon
+                  htmlFor="purple-toggle"
+                  className="h-7 cursor-pointer fill-yellow-500 hover:stroke-yellow-600"
+                />
+              </label>
             )}
           </li>
           <li className="flex items-center">
