@@ -13,10 +13,15 @@ function App() {
   const changeUsernameHandler = (newName) => {
     if (newName) {
       setUsername(newName);
+      localStorage.setItem('username', newName);
       setIsLoggedIn(true);
-      // localStorage.setItem('username', newName);
     } else alert('İsim boş bırakılamaz');
   };
+
+  useEffect(() => {
+    const usernameItem = localStorage.getItem('username');
+    if (usernameItem) changeUsernameHandler(usernameItem);
+  }, []);
 
   useEffect(() => {
     if (darkMode) setDarkClass('dark');
