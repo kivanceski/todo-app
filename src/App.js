@@ -3,6 +3,7 @@ import './App.css';
 import Login from './components/Login';
 import MainPage from './components/MainPage';
 import UserContext from './context/user-context';
+import Swal from 'sweetalert2';
 
 function App() {
   const [username, setUsername] = useState('');
@@ -15,7 +16,14 @@ function App() {
       setUsername(newName);
       localStorage.setItem('username', newName);
       setIsLoggedIn(true);
-    } else alert('İsim boş bırakılamaz');
+    } else {
+      Swal.fire({
+        title: 'Uyarı',
+        text: 'İsim boş bırakılamaz.',
+        icon: 'warning',
+        confirmButtonText: 'Tamam',
+      });
+    }
   };
 
   useEffect(() => {
