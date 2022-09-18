@@ -80,12 +80,9 @@ const Todos = () => {
     }
   };
 
-  const editTodoHandler = async (todoId) => {
+  const editTodoHandler = async (editedTodo) => {
     try {
-      const editedTodo = todosList.find((todo) => todo.id === todoId);
-      editedTodo.content = 'Lel';
-      editedTodo.isCompleted = false;
-      await axios.put(`/todos/${todoId}`, editedTodo);
+      await axios.put(`/todos/${editedTodo.id}`, editedTodo);
       await fetchTodos();
     } catch (e) {
       console.error(e);
@@ -156,7 +153,7 @@ const Todos = () => {
         />
         <button
           onClick={createTodoHandler}
-          className="bg-emerald-500 hover:bg-emerald-400 rounded-xl px-5 py-2 text-md font-semibold flex items-center gap-2 mx-auto"
+          className="bg-emerald-500 hover:bg-emerald-400 text-slate-200 rounded-xl px-5 py-2 text-md font-semibold flex items-center gap-2 mx-auto"
         >
           <PlusCircleIcon className="h-5" /> <span>Ekle</span>
         </button>

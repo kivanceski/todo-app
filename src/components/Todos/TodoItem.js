@@ -8,6 +8,17 @@ import {
 
 const TodoItem = (props) => {
   const [editMode, setEditMode] = useState(false);
+  const [newTitle, setNewTitle] = useState(props.todoContent);
+
+  const editHandler = async () => {
+    const editedTodo = {
+      id: props.id,
+      content: newTitle,
+      isCompleted: false,
+    };
+    props.onEditTodo(editedTodo);
+    setEditMode(false);
+  };
 
   return (
     <div
@@ -17,20 +28,37 @@ const TodoItem = (props) => {
           : ' border border-gray-900 bg-slate-100'
       }`}
     >
-      <h6
-        className={`text-lg mb-3 break-words max-h-50 ${
-          props.isCompleted ? 'line-through' : ''
-        }`}
-      >
-        {props.todoContent}
-      </h6>
+      {!editMode && (
+        <h6
+          className={`text-lg mb-3 break-words max-h-50 ${
+            props.isCompleted ? 'line-through' : ''
+          }`}
+        >
+          {props.todoContent}
+        </h6>
+      )}
       {editMode ? (
         <div>
+          <label htmlFor="todo-title" className="text-center cursor-pointer">
+            Todo Başlığı
+          </label>
+          <input
+            value={newTitle}
+            onChange={(e) => setNewTitle(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                editHandler();
+              }
+            }}
+            type="text"
+            name="todo-title"
+            id="todo-title"
+            className="text-center w-5/6 mb-2 md:mb-0 h-10 bg-gray-100 rounded p-2 mr-4 border focus:outline-none focus:border-blue-500 text-gray-900"
+          />
           <div className="flex items-center gap-2 justify-center">
             <CheckCircleIcon
               onClick={() => {
-                props.onEditTodo(props.id);
-                setEditMode(false);
+                editHandler();
               }}
               title="Kaydet"
               className="h-7 cursor-pointer stroke-emerald-500 hover:stroke-emerald-600"
