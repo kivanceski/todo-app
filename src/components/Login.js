@@ -7,7 +7,7 @@ const Login = () => {
 
   return (
     <div className="flex h-screen items-center justify-center">
-      <div className="bg-slate-100 dark:bg-gray-900 w-1/4 rounded-2xl px-12 py-8">
+      <div className="bg-slate-100 dark:bg-gray-900 w-3/4 md:w-1/2 lg:w-1/3 rounded-2xl px-12 py-8">
         <label
           htmlFor="first_name"
           className="block text-3xl font-extrabold mb-8 text-gray-900 dark:text-slate-100"
